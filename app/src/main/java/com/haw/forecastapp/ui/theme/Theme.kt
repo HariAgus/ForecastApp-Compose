@@ -28,7 +28,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun ForecastAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun ForecastAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
@@ -37,7 +40,7 @@ fun ForecastAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compo
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = QuickSandTypography,
         shapes = Shapes,
         content = content
     )
