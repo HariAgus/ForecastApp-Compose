@@ -3,7 +3,7 @@ package com.haw.forecastapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.haw.forecastapp.navigation.WeatherNavigation
+import com.haw.forecastapp.navigation.Navigation
 import com.haw.forecastapp.ui.theme.ForecastAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ForecastAppTheme {
-                WeatherNavigation()
+                Navigation()
             }
         }
     }
