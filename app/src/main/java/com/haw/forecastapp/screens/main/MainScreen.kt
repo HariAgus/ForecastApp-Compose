@@ -1,4 +1,4 @@
-package com.haw.forecastapp.screens
+package com.haw.forecastapp.screens.main
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
