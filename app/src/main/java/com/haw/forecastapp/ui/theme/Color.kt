@@ -9,10 +9,18 @@ val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 
 val colorPrimary = Color(0xFF3C6FD1)
+val colorSecond = Color(0xFF7CA9FF)
 
 val gradientBackgroundPrimary = Brush.linearGradient(
     colors = listOf(
-        Color(0xFF3C6FD1),
-        Color(0xFF7CA9FF)
+        colorPrimary,
+        colorSecond
+    )
+)
+
+val gradientBackgroundGray = Brush.linearGradient(
+    colors = listOf(
+        Color.White,
+        Color.White.copy(alpha = 0f)
     )
 )
