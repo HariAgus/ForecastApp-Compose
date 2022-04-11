@@ -2,4 +2,5 @@
     <string name="app_name">ForecastApp</string>
     <string name="image_logo">Image Logo</string>
     <string name="title_app">Weather Forecast</string>
+    <string name="search_icon">Search Icon</string>
 </resources>
