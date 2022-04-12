@@ -5,12 +5,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -19,6 +22,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,6 +33,7 @@ import coil.compose.rememberImagePainter
 import com.haw.forecastapp.R
 import com.haw.forecastapp.data.DataOrException
 import com.haw.forecastapp.model.Weather
+import com.haw.forecastapp.model.WeatherItem
 import com.haw.forecastapp.ui.theme.gradientBackgroundGray
 import com.haw.forecastapp.ui.theme.gradientBackgroundPrimary
 import com.haw.forecastapp.utils.Constants
@@ -102,7 +107,7 @@ fun MainContent(data: Weather) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
-                .height(200.dp)
+                .height(IntrinsicSize.Max)
                 .background(
                     brush = gradientBackgroundPrimary,
                     shape = RoundedCornerShape(24.dp),
@@ -128,7 +133,66 @@ fun MainContent(data: Weather) {
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 24.sp
                 )
+                HumidityWindPressureRow(weather = data.list[0])
             }
+        }
+    }
+
+}
+
+@Composable
+fun HumidityWindPressureRow(weather: WeatherItem) {
+    Row(
+        modifier = Modifier
+            .padding(12.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            modifier = Modifier.padding(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.humidity),
+                contentDescription = stringResource(R.string.humidity_icon),
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                modifier = Modifier.padding(start = 4.dp),
+                text = "${weather.humidity}%",
+                style = MaterialTheme.typography.h5
+            )
+        }
+        Row(
+            modifier = Modifier.padding(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.pressure),
+                contentDescription = stringResource(R.string.pressure_icon),
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                modifier = Modifier.padding(start = 4.dp),
+                text = "${weather.pressure} psi",
+                style = MaterialTheme.typography.h5
+            )
+        }
+        Row(
+            modifier = Modifier.padding(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.wind),
+                contentDescription = stringResource(R.string.wind_icon),
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                modifier = Modifier.padding(start = 4.dp),
+                text = "${weather.humidity} mph",
+                style = MaterialTheme.typography.h5
+            )
         }
     }
 }
