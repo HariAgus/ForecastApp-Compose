@@ -4,4 +4,7 @@
     <string name="title_app">Weather Forecast</string>
     <string name="search_icon">Search Icon</string>
     <string name="icon_image">Icon Image</string>
+    <string name="humidity_icon">Humidity Icon</string>
+    <string name="wind_icon">Wind Icon</string>
+    <string name="pressure_icon">Pressure Icon</string>
 </resources>
