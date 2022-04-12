@@ -41,11 +41,13 @@ import com.haw.forecastapp.data.DataOrException
 import com.haw.forecastapp.model.Weather
 import com.haw.forecastapp.model.WeatherItem
 import com.haw.forecastapp.ui.theme.gradientBackgroundPrimary
+import com.haw.forecastapp.ui.theme.gray
 import com.haw.forecastapp.utils.Constants
 import com.haw.forecastapp.utils.formatDate
 import com.haw.forecastapp.utils.formatDateTime
 import com.haw.forecastapp.utils.formatDecimals
 import com.haw.forecastapp.widgets.WeatherAppBar
+import java.util.*
 
 @Composable
 fun MainScreen(
@@ -57,7 +59,7 @@ fun MainScreen(
             initialValue =
             DataOrException(loading = true)
         ) {
-            value = mainViewModel.getWeatherData(city = "Moscow")
+            value = mainViewModel.getWeatherData(city = "Jakarta")
         }.value
 
     if (weatherData.loading == true) {
@@ -78,12 +80,11 @@ fun MainScaffold(
     Scaffold(
         topBar = {
             WeatherAppBar(
-                title = weather.city.name + ",${weather.city.country}",
+                title = weather.city.name + ", ${weather.city.country}",
                 navController = navController,
-            ) {
-
-            }
-        }
+            ) {}
+        },
+        backgroundColor = gray
     ) {
         MainContent(data = weather)
     }
@@ -96,9 +97,10 @@ fun MainContent(data: Weather) {
 
     Column(
         Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .background(color = gray),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             modifier = Modifier.padding(6.dp),
@@ -153,11 +155,13 @@ fun MainContent(data: Weather) {
         )
         Surface(
             modifier = Modifier
+                .background(color = gray)
                 .fillMaxWidth()
                 .fillMaxHeight(),
         ) {
             LazyColumn(
-                modifier = Modifier.padding(2.dp),
+                modifier = Modifier
+                    .background(color = gray),
                 contentPadding = PaddingValues(1.dp)
             ) {
                 items(items = data.list) { item ->
@@ -290,9 +294,38 @@ fun WeatherDetailRow(weather: WeatherItem) {
             .fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         color = Color.White,
-        elevation = 8.dp
+        elevation = 6.dp
     ) {
-        Text(text = weather.deg.toString())
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(
+                modifier = Modifier.padding(start = 6.dp)
+            ) {
+                Text(
+                    modifier = Modifier.padding(6.dp),
+                    text = formatDate(weather.dt),
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    modifier = Modifier.padding(4.dp),
+                    text = weather.weather[0].description.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(
+                            Locale.getDefault()
+                        ) else it.toString()
+                    },
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+            Image(
+                modifier = Modifier.size(80.dp),
+                painter = rememberImagePainter(imageUrl),
+                contentDescription = stringResource(id = R.string.sunrise_icon),
+            )
+        }
     }
 
 }
