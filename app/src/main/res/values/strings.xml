@@ -7,4 +7,7 @@
     <string name="humidity_icon">Humidity Icon</string>
     <string name="wind_icon">Wind Icon</string>
     <string name="pressure_icon">Pressure Icon</string>
+    <string name="sunrise_icon">Sunrise Icon</string>
+    <string name="sunset_icon">Sunset Icon</string>
+    <string name="weather_this_week">Weather This Week</string>
 </resources>
