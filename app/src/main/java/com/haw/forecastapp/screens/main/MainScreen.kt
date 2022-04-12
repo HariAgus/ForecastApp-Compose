@@ -6,16 +6,22 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
@@ -34,7 +40,6 @@ import com.haw.forecastapp.R
 import com.haw.forecastapp.data.DataOrException
 import com.haw.forecastapp.model.Weather
 import com.haw.forecastapp.model.WeatherItem
-import com.haw.forecastapp.ui.theme.gradientBackgroundGray
 import com.haw.forecastapp.ui.theme.gradientBackgroundPrimary
 import com.haw.forecastapp.utils.Constants
 import com.haw.forecastapp.utils.formatDate
@@ -91,9 +96,7 @@ fun MainContent(data: Weather) {
 
     Column(
         Modifier
-            .padding(4.dp)
-            .fillMaxWidth()
-            .background(brush = gradientBackgroundGray),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -138,6 +141,30 @@ fun MainContent(data: Weather) {
             }
         }
         SunsetSunRiseRow(weather = data.list[0])
+        Divider(
+            modifier = Modifier.padding(4.dp),
+            thickness = 2.dp
+        )
+        Text(
+            text = stringResource(R.string.weather_this_week),
+            style = MaterialTheme.typography.h2,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold
+        )
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+        ) {
+            LazyColumn(
+                modifier = Modifier.padding(2.dp),
+                contentPadding = PaddingValues(1.dp)
+            ) {
+                items(items = data.list) { item ->
+                    WeatherDetailRow(weather = item)
+                }
+            }
+        }
     }
 
 }
@@ -250,6 +277,24 @@ fun SunsetSunRiseRow(weather: WeatherItem) {
             )
         }
     }
+}
+
+@Composable
+fun WeatherDetailRow(weather: WeatherItem) {
+    val imageUrl = Constants.BASE_IMAGE_URL + weather.weather[0].icon + ".png"
+
+    Surface(
+        modifier = Modifier
+            .padding(8.dp)
+            .height(IntrinsicSize.Max)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        color = Color.White,
+        elevation = 8.dp
+    ) {
+        Text(text = weather.deg.toString())
+    }
+
 }
 
 @Composable

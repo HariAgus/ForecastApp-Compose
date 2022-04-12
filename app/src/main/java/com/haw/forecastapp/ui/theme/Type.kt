@@ -29,7 +29,7 @@ val QuickSandTypography = Typography(
     ),
     h3 = TextStyle(
         fontFamily = QuickSand,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp
     ),
     h4 = TextStyle(
