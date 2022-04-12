@@ -38,6 +38,7 @@ import com.haw.forecastapp.ui.theme.gradientBackgroundGray
 import com.haw.forecastapp.ui.theme.gradientBackgroundPrimary
 import com.haw.forecastapp.utils.Constants
 import com.haw.forecastapp.utils.formatDate
+import com.haw.forecastapp.utils.formatDateTime
 import com.haw.forecastapp.utils.formatDecimals
 import com.haw.forecastapp.widgets.WeatherAppBar
 
@@ -124,7 +125,7 @@ fun MainContent(data: Weather) {
                     style = MaterialTheme.typography.h2,
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp
+                    fontSize = 32.sp
                 )
                 Text(
                     text = weather.main,
@@ -136,6 +137,7 @@ fun MainContent(data: Weather) {
                 HumidityWindPressureRow(weather = data.list[0])
             }
         }
+        SunsetSunRiseRow(weather = data.list[0])
     }
 
 }
@@ -174,7 +176,9 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 modifier = Modifier.size(20.dp)
             )
             Text(
-                modifier = Modifier.padding(start = 4.dp),
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .align(Alignment.CenterVertically),
                 text = "${weather.pressure} psi",
                 style = MaterialTheme.typography.h5
             )
@@ -189,9 +193,60 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 modifier = Modifier.size(20.dp)
             )
             Text(
-                modifier = Modifier.padding(start = 4.dp),
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .align(Alignment.CenterVertically),
                 text = "${weather.humidity} mph",
                 style = MaterialTheme.typography.h5
+            )
+        }
+    }
+}
+
+@Composable
+fun SunsetSunRiseRow(weather: WeatherItem) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 12.dp,
+                bottom = 6.dp,
+                start = 16.dp,
+                end = 16.dp
+            ),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.sunrise),
+                contentDescription = stringResource(R.string.sunrise_icon),
+                modifier = Modifier.size(32.dp),
+            )
+            Text(
+                modifier = Modifier
+                    .padding(end = 4.dp, top = 4.dp)
+                    .align(Alignment.CenterVertically),
+                text = formatDateTime(weather.sunrise),
+                style = MaterialTheme.typography.h6,
+            )
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(end = 4.dp, top = 4.dp)
+                    .align(Alignment.CenterVertically),
+                text = formatDateTime(weather.sunset),
+                style = MaterialTheme.typography.h6,
+            )
+            Image(
+                painter = painterResource(id = R.drawable.sunset),
+                contentDescription = stringResource(R.string.sunset_icon),
+                modifier = Modifier.size(32.dp),
             )
         }
     }

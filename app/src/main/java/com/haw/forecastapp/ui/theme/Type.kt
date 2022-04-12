@@ -42,6 +42,11 @@ val QuickSandTypography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp
     ),
+    h6 = TextStyle(
+        fontFamily = QuickSand,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp
+    ),
     body1 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.Normal,
