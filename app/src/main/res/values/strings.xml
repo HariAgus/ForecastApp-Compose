@@ -3,4 +3,5 @@
     <string name="image_logo">Image Logo</string>
     <string name="title_app">Weather Forecast</string>
     <string name="search_icon">Search Icon</string>
+    <string name="icon_image">Icon Image</string>
 </resources>
