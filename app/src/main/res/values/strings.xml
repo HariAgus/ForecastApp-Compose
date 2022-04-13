@@ -11,4 +11,8 @@
     <string name="sunset_icon">Sunset Icon</string>
     <string name="weather_this_week">Weather This Week</string>
     <string name="search">Search</string>
+    <string name="icon_favorite">Icon Favorite</string>
+    <string name="favorites">Favorites</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
 </resources>

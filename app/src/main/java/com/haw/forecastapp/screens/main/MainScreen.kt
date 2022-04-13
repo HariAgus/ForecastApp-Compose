@@ -44,6 +44,7 @@ import com.haw.forecastapp.ui.theme.gray
 import com.haw.forecastapp.utils.Constants
 import com.haw.forecastapp.utils.formatDecimals
 import com.haw.forecastapp.widgets.HumidityRow
+import com.haw.forecastapp.widgets.ItemDrawer
 import com.haw.forecastapp.widgets.SunsetSunRiseRow
 import com.haw.forecastapp.widgets.WeatherAppBar
 import com.haw.forecastapp.widgets.WeatherWeeklyRow
@@ -51,14 +52,14 @@ import com.haw.forecastapp.widgets.WeatherWeeklyRow
 @Composable
 fun MainScreen(
     navController: NavController,
-    mainViewModel: MainViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel(),
+    city: String?
 ) {
     val weatherData =
         produceState<DataOrException<Weather, Boolean, Exception>>(
-            initialValue =
-            DataOrException(loading = true)
+            initialValue = DataOrException(loading = true)
         ) {
-            value = mainViewModel.getWeatherData(city = "Jakarta")
+            value = mainViewModel.getWeatherData(city = city.toString())
         }.value
 
     if (weatherData.loading == true) {
@@ -93,6 +94,9 @@ fun MainScaffold(
                     navController.navigate(WeatherScreens.SearchScreen.name)
                 }
             )
+        },
+        drawerContent = {
+            ItemDrawer()
         },
         backgroundColor = gray
     ) {
