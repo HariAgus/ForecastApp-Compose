@@ -37,11 +37,11 @@ import coil.compose.rememberImagePainter
 import com.haw.forecastapp.R
 import com.haw.forecastapp.data.DataOrException
 import com.haw.forecastapp.model.Weather
+import com.haw.forecastapp.navigation.WeatherScreens
 import com.haw.forecastapp.ui.theme.colorPrimary
 import com.haw.forecastapp.ui.theme.gradientBackgroundPrimary
 import com.haw.forecastapp.ui.theme.gray
 import com.haw.forecastapp.utils.Constants
-import com.haw.forecastapp.utils.formatDate
 import com.haw.forecastapp.utils.formatDecimals
 import com.haw.forecastapp.widgets.HumidityRow
 import com.haw.forecastapp.widgets.SunsetSunRiseRow
@@ -89,7 +89,10 @@ fun MainScaffold(
             WeatherAppBar(
                 title = weather.city.name + ", ${weather.city.country}",
                 navController = navController,
-            ) {}
+                onAddActionClicked = {
+                    navController.navigate(WeatherScreens.SearchScreen.name)
+                }
+            )
         },
         backgroundColor = gray
     ) {
@@ -109,13 +112,6 @@ fun MainContent(data: Weather) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            modifier = Modifier.padding(6.dp),
-            text = formatDate(data.list[0].dt), // Wed Nov 30
-            style = MaterialTheme.typography.h2,
-            color = Color.Black,
-            fontWeight = FontWeight.SemiBold
-        )
         Box(
             modifier = Modifier
                 .fillMaxWidth()
