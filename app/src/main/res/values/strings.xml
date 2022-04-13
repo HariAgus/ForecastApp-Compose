@@ -10,4 +10,5 @@
     <string name="sunrise_icon">Sunrise Icon</string>
     <string name="sunset_icon">Sunset Icon</string>
     <string name="weather_this_week">Weather This Week</string>
+    <string name="search">Search</string>
 </resources>
