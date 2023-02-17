@@ -6,3 +6,6 @@ Made using jetpack compose, Jetpack Compose is Android’s modern toolkit for bu
 ### Preview App :
 <img src="https://github.com/HariAgus/ForecastApp-Compose/blob/master/assets/design_app.png" alt="Forecast App">
 Design by : <a href="<a href="https://www.figma.com/@lakshaybomotra">Lakshay</a>
+
+
+
